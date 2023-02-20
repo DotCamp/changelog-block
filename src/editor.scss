@@ -1,9 +1,53 @@
 /**
- * The following styles get applied inside the editor only.
+ * The following styles get applied both on the front of your site
+ * and in the editor.
  *
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-changelog {
-	border: 1px dotted #f00;
+ .changelog-block {
+    padding: 0;
+    margin: 10px auto;
+    max-width: 100%;
+}
+
+.changelog-block h2 {
+    display: inline;
+}
+
+.changelog-block-date {
+    background: linear-gradient(100deg, #f63d3d 0%, #DD3636 100%);
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 10px;
+    vertical-align: 5px;
+    border-radius: 3px;
+    margin-left: 15px;
+    display: inline;
+}
+
+.changelog-block ul {
+    list-style-type: none !important;
+    padding-left: 0;
+    margin-bottom: 2rem !important;
+    margin-top: 1em !important;
+    margin-left: 0 !important;
+}
+
+.changelog-block li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.changelog-block li::before {
+    content: '';
+    margin-right: 10px;
+    background: #AC2A2A;
+    position: absolute;
+    width: 12px;
+    height: 3px;
+    left: 0;
+    top: 13px;
 }

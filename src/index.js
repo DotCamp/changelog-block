@@ -1,39 +1,88 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
 import { registerBlockType } from '@wordpress/blocks';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { createElement } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 import './style.scss';
+import './editor.scss';
 
-/**
- * Internal dependencies
- */
-import Edit from './edit';
-import save from './save';
-import metadata from './block.json';
+const attributes = {
+  version: {
+    source: 'html',
+    selector: '.changelog-block-version',
+    default: 'Version 1.0.0'
+  },
+  date: {
+    source: 'html',
+    selector: '.changelog-block-date',
+    default: 'April 3rd, 2019'
+  },
+  changelogList: {
+    source: 'html',
+    selector: 'ul',
+    multiline: 'li',
+    default: '',
+  }
+};
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
+registerBlockType('changelog-block/block-changelog', {
+  title: __('Changelog'),
+  icon: 'editor-ul',
+  category: 'common',
+  keywords: [
+    __('changelog'),
+    __('plugins themes'),
+  ],
+  attributes,
 
-	/**
-	 * @see ./save.js
-	 */
-	save,
-} );
+  edit: function(props) {
+    const { setAttributes } = props;
+    const { version, date, changelogList } = props.attributes;
+
+    return (
+      <div className="changelog-block">
+        <RichText
+          tagName="h2"
+          value={version}
+          className={'changelog-block-version'}
+          onChange={version => setAttributes({ version })}
+          keepPlaceholderOnFocus
+        />
+        <RichText
+          tagName="p"
+          value={date}
+          className={'changelog-block-date'}
+          onChange={date => setAttributes({ date })}
+          keepPlaceholderOnFocus
+        />
+        <RichText
+          tagName="ul"
+          multiline="li"
+          value={changelogList}
+          onChange={changelogList => setAttributes({ changelogList })}
+          keepPlaceholderOnFocus
+        />
+      </div>
+    );
+  },
+
+  save: function(props) {
+    const { version, date, changelogList } = props.attributes;
+
+    return (
+      <div className="changelog-block">
+        <RichText.Content
+          tagName="h2"
+          className={'changelog-block-version'}
+          value={version}
+        />
+        <RichText.Content
+          tagName="p"
+          className={'changelog-block-date'}
+          value={date}
+        />
+        <RichText.Content tagName="ul" value={changelogList} />
+      </div>
+    );
+  },
+});
