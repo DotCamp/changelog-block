@@ -1,0 +1,87 @@
+/* Changelog Block Styling */
+.changelog-block {
+    padding: 30px;
+    margin-bottom: 2px; /* To create a subtle separator between blocks */
+    border-radius: 8px;
+    background-color: #f7f9fc; 
+    position: relative;
+    border-bottom: 2px solid #d7d9dd; /* Visual separator */
+    cursor: default;
+}
+
+/* Remove the vertical timeline line for cleaner stacking */
+.changelog-block:before {
+    display: none;
+}
+
+/* Version Styling */
+.changelog-version {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #fff;
+    background: linear-gradient(135deg, #e11b4c, #f8416f); 
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;   /* Make the version inline */
+    margin-right: 15px;
+}
+
+/* Date Styling */
+.changelog-date {
+    font-size: 1.05em;
+    color: #2e2e2e;
+    display: inline-block;
+    font-weight: 500;
+}
+
+/* List Styling */
+.changelog-block ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.changelog-block ul li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    margin-left: 50px;
+    transition: all 0.3s ease-in-out; /* added transition for smoother effect */
+}
+
+.changelog-block ul li:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-3px); /* subtle lift effect */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08); /* enhanced shadow for depth */
+}
+
+/* Timeline dot for each changelog item */
+.changelog-block ul li:before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #d7d9dd; /* matched with the timeline color */
+    border-radius: 50%;
+    left: -36px;
+    top: 10px;
+    z-index: 1;
+    transition: background 0.3s ease-in-out; /* added transition for smoother effect */
+}
+
+/* Enhanced timeline dot on changelog item hover */
+.changelog-block ul li:hover:before {
+    background: #e11b4c;
+}
+
+/* Style for Icons/Emojis representing change type */
+.change-icon {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.2em; /* Adjust according to preference */
+    vertical-align: middle;
+}
